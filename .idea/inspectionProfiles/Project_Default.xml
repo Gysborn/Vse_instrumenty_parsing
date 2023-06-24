@@ -1,0 +1,48 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="--whencontenteditable--webkitusermodify" />
+            <item index="7" class="java.lang.String" itemvalue="read-write-plaintext-only" />
+            <item index="8" class="java.lang.String" itemvalue="h2" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="greenlet" />
+            <item index="1" class="java.lang.String" itemvalue="six" />
+            <item index="2" class="java.lang.String" itemvalue="Werkzeug" />
+            <item index="3" class="java.lang.String" itemvalue="aniso8601" />
+            <item index="4" class="java.lang.String" itemvalue="typing-extensions" />
+            <item index="5" class="java.lang.String" itemvalue="MarkupSafe" />
+            <item index="6" class="java.lang.String" itemvalue="click" />
+            <item index="7" class="java.lang.String" itemvalue="importlib-metadata" />
+            <item index="8" class="java.lang.String" itemvalue="Jinja2" />
+            <item index="9" class="java.lang.String" itemvalue="attrs" />
+            <item index="10" class="java.lang.String" itemvalue="pyrsistent" />
+            <item index="11" class="java.lang.String" itemvalue="importlib-resources" />
+            <item index="12" class="java.lang.String" itemvalue="pytz" />
+            <item index="13" class="java.lang.String" itemvalue="itsdangerous" />
+            <item index="14" class="java.lang.String" itemvalue="jsonschema" />
+            <item index="15" class="java.lang.String" itemvalue="Flask" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="requirements.InstalledPackageInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
