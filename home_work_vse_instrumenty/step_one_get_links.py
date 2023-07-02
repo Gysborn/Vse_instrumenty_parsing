@@ -1,47 +1,54 @@
 import time
 import undetected_chromedriver
+from selenium.webdriver.common.by import By
+
 from home_work_vse_instrumenty.lib import *
 
 # Цель: Получить 100 html файлов содержащих по 20 товаров
 
 """
-Код ниже что бы получить куки
+Ниже, тестируем драйвер на скрытность
 """
+path_cookie = 'vi_cookies'
 
 
-# browser = web_driver()  # Получаем браузер
+def check_driver():
+    try:
+        driver = undetected_chromedriver.Chrome()
+        # driver.get('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html')
+        # driver.get("https://www.vindecoderz.com/EN/check-lookup/ZDMMADBMXHB001652")
+        driver.get("https://vseinstrumenti.ru/")
+        time.sleep(2)
+        get_cookies(driver, path_cookie)
+        driver.refresh()
+        time.sleep(10)
+        # res = driver.get_log('browser')
+        # print(res)
+    except Exception as e:
+        print(e)
+    finally:
+        driver.close()
+        driver.quit()
 
-# driver.get('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html')
-# driver.get("https://www.vindecoderz.com/EN/check-lookup/ZDMMADBMXHB001652")
-# driver.get("https://vseinstrumenti.ru/")
 
-# time.sleep(30)
-# get_cookies(browser, "vi_rostov_cookies")
-# time.sleep(30)
-
-# har = browser.get_log('browser')
-# res = har[0]['message']
-# print(res)
+""" Тесты прошли успешно"""
 
 
 def main_one():
     url = 'https://rostov.vseinstrumenti.ru/category/bolgarki-ushm-123/'
-    url2 = 'https://rostov.vseinstrumenti.ru/category/bolgarki-ushm-123/page'
-    cookie_path = "vi_rostov_cookies"
+    url2 = 'https://vseinstrumenti.ru/category/bolgarki-ushm-123/page'
     try:
         browser = undetected_chromedriver.Chrome()
-        for i in range(1, 4):
+        for i in range(91, 101):
             if i != 1:  # На первой итерации нам нужен именно url
                 url = url2 + f"{i}/"  # На остальных url2
             browser.get(url)  # Открываем ссылку
-            # load_cookies(browser, cookie_path)
-            # browser.refresh()
-            time.sleep(10)
-            har = browser.get_log('browser')
-            res = har[0]['message']
-            print(res)
-            # if '200' in res:
-            #     raise Exception('ошибка')
+            # time.sleep(1)
+            # load_cookies(browser, path_cookie)
+            time.sleep(5)
+            res = browser.find_element(By.CLASS_NAME, "E-Geio")
+            if res:
+                print(res.text[:21])
             with open(f"data/page_{i}.html", "w", encoding="utf-8") as file:
                 file.write(browser.page_source)  # Сохраняем страничку в файл методом page_source с расш. html
             print(f"{i}_page записана")
@@ -52,4 +59,9 @@ def main_one():
         browser.quit()
 
 
-main_one()
+flag = 1
+if __name__ == '__main__':
+    if flag:
+        main_one()
+    else:
+        check_driver()
