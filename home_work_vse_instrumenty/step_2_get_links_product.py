@@ -1,6 +1,4 @@
-from home_work_vse_instrumenty.lib import *
 from bs4 import BeautifulSoup
-import lxml
 
 
 # Цель: Получить текстовый файл ссылок на товары, всего 2000
@@ -16,7 +14,7 @@ def main():
             result += soup.find_all("div", class_="Z6EojR Z9UMXC")
         collect = []
         for link in result:
-            href = "https://rostov.vseinstrumenti.ru/" + link.find("a").get("href")  # 1 ссылка 1 товар
+            href = "https://vseinstrumenti.ru" + link.find("a").get("href")  # 1 ссылка 1 товар
             collect.append(href)
         try:
             with open("data/product_links", "a", encoding="utf-8") as f:  # Сохраняем в текстовый файл

@@ -12,12 +12,12 @@ import os
 class Product(BaseModel):
     title: str
     image: str
-    article: dict = {}
-    price: int
+    article: str
+    price: str
     description: str
     tech_specifications: dict = {}
     warranty: str
-    rating: float
+    rating: str
 
 
 user_agent = "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 YaBrowser/23.5.3.904 Yowser/2.5 Safari/537.36"
