@@ -82,11 +82,11 @@ for category_name, category_href in all_categories.items():
     product_info = []
     for item in products_data:
         product_tds = item.find_all("td")
-        title = product_tds[0].find("a").text
-        calories = product_tds[1].text
-        proteins = product_tds[2].text
-        fats = product_tds[3].text
-        carbohydrates = product_tds[4].text
+        title = product_tds[0].find("a").target
+        calories = product_tds[1].target
+        proteins = product_tds[2].target
+        fats = product_tds[3].target
+        carbohydrates = product_tds[4].target
 
         product_info.append(
             {

@@ -26,7 +26,8 @@ user_agent = "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5
 def web_driver():
     opt = webdriver.ChromeOptions()
     opt.add_argument("--disable-blink-features=AutomationControlled")
-    opt.add_argument('Access-Control-Allow-Origin=https://www.vseinstrumenti.ru')
+    opt.add_argument('Access-Control-Allow-Origin=https://www.2ip.ru')
+    opt.add_argument('--proxy-server=38.154.88.110:8000')
     opt.add_argument(user_agent)
 
     return webdriver.Chrome(

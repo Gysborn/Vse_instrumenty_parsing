@@ -28,7 +28,7 @@ for url in stc[0:1]:
         fest_data_all = soup.find("div", class_="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol")
         fest_name = soup.find("h1", class_="MuiTypography-root").text.strip()
         fest_data = fest_data_all[0].find_all("span")
-        fest_date = fest_data[0].text + '\n' + fest_data[1].text
+        fest_date = fest_data[0].target + '\n' + fest_data[1].target
         fest_title_about = soup.find("h2", class_="MuiTypography-root MuiTypography-h2 css-1w169lz").text
         fest_about_all = soup.find_all("div", class_="MuiBox-root css-0")
         fest_about = fest_about_all[-1].next_element.next_element.text
