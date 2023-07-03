@@ -1,9 +1,7 @@
-import time
-from selenium.webdriver.common.by import By
 import undetected_chromedriver
-
 from home_work_vse_instrumenty.lib import *
 import json
+import time
 
 
 # Цель: распарсить страницы товара по ссылкам из product_links
@@ -14,7 +12,7 @@ def main():
         links = iter(file.readlines())  # Передаем в ленивый итератор что бы не загружать память
     try:
         browser = undetected_chromedriver.Chrome()
-        for _ in range(3):
+        for _ in range(1):
             url = next(links)  # Запускаем цикл, по кол. ссылок и достаем по одной
             browser.get(url)  # Передаем в браузер
             time.sleep(5)
@@ -24,7 +22,7 @@ def main():
             with open(f"data/page{_}.html", encoding="utf-8") as f:  # Открываем этот же файл
                 src = f.read()  # В переменную
 
-            print(f"parsing... {_}")
+            print(f"parsing... {_+1}")
             soup = BeautifulSoup(src, 'lxml')  # Инициализируем суп...
             pars = Parsing(soup)  # Наш класс для парсинга
             prod = Product(
@@ -32,7 +30,7 @@ def main():
                 image=pars.parsing_image(),
                 price=pars.parsing_price().replace('\xa0', ''),
                 description=pars.parsing_descr(),
-                tech_specifications={'Teхнические характеристики': pars.parsing_tech()},
+                tech_specifications=pars.parsing_tech(),
                 warranty=pars.parsing_warranty(),
                 article=pars.parsing_article(),
                 rating=pars.parsing_rating()
@@ -41,11 +39,10 @@ def main():
             data_tools.append(dict_data)
 
             del_file(f"data/page{_}.html")  # Удаляем файл html(подумал что 2000 файлов это туматч)
-            print(f"{_} json is ready {2000 - _} left")
+            print(f"{_ + 1} json is ready, {2000 - _ + 1} left")
 
         with open("data/data_tool.json", "w", encoding='utf-8') as fjson:  # И записываем в файл
             json.dump(data_tools, fjson, ensure_ascii=False, indent=4)
-
 
     except Exception as e:
         print(e)

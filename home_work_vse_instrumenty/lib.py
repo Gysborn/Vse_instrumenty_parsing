@@ -3,7 +3,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from pydantic import BaseModel
 from bs4 import BeautifulSoup
-import itertools as it
 import pickle
 
 import os
@@ -15,7 +14,7 @@ class Product(BaseModel):
     article: str
     price: str
     description: str
-    tech_specifications: dict = {}
+    tech_specifications: dict
     warranty: str
     rating: str
 
@@ -38,20 +37,6 @@ def web_driver():
 class Parsing:
     def __init__(self, soup_obj: BeautifulSoup):
         self.soup = soup_obj
-        # Создаем лист из названий характеристик что бы затем объединить его в словарь
-        # со значениями
-        self.tech_title = [
-            'Напряжение', 'Мощность', 'Диаметр диска', 'Посадочный диаметр', 'Число оборотов',
-            'Min число оборотов', 'Электр. регулировка оборотов', 'Вид кнопки включения',
-            'Кнопка фиксации пуска', 'Суперфланец', 'Быстрозажимная гайка SDS',
-            'Защита от непреднамеренного пуска', 'Работа по бетону (камню)', 'Подача воды',
-            'Регулировка положения кожуха без инструмента',
-            'Поддержание постоянных оборотов под нагрузкой', 'Возможность подключения к пылесосу',
-            'Наличие виброручки', 'Длина кабеля', 'Плавный пуск', ' Кожух для пылеудаления',
-            'Упаковка', 'Вес нетто', 'Тип двигателя', 'Резьба шпинделя', 'Диск в комплекте',
-            'Блокировка шпинделя при заклинивании диска', 'Количество положений рукоятки',
-            'Защита от перегрева двигателя', 'Max глубина реза',
-        ]
 
     def parsing_title(self) -> str:  # Метод получения названия товара
         res = self.soup.find('div', class_='pKTE7p')
@@ -70,10 +55,13 @@ class Parsing:
         return res.find('p').text.strip()
 
     def parsing_tech(self) -> dict:  # Метод получения характеристик в словаре
-        res = self.soup.find_all('span', itemprop="value")
-        list_value = [v.text.strip() if v else None for v in res]
-        obj = dict(it.zip_longest(self.tech_title, list_value))
-        return obj
+        divs = self.soup.find_all('div', class_='mbBW2z')
+        dict_value = {"Teхнические характеристики": {}}
+        for div in divs:
+            key = div.find('span').text.strip()
+            value = div.find_next_sibling().text.strip()
+            dict_value["Teхнические характеристики"].update({key: value})
+        return dict_value
 
     def parsing_warranty(self) -> str:  # Метод получения гарантии
         res = self.soup.find('div', class_="EJUM2Y")
