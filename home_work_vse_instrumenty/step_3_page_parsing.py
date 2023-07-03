@@ -12,7 +12,7 @@ def main():
         links = iter(file.readlines())  # Передаем в ленивый итератор что бы не загружать память
     try:
         browser = undetected_chromedriver.Chrome()
-        for _ in range(1):
+        for _ in range(3):
             url = next(links)  # Запускаем цикл, по кол. ссылок и достаем по одной
             browser.get(url)  # Передаем в браузер
             time.sleep(5)
@@ -38,7 +38,7 @@ def main():
             dict_data = prod.dict()  # Сериализуем данные из пидантика в словарь
             data_tools.append(dict_data)
 
-            del_file(f"data/page{_}.html")  # Удаляем файл html(подумал что 2000 файлов это туматч)
+            del_file(f"data/page{_}.html")  # Удаляем файл html(подумал что 2008 файлов это туматч)
             print(f"{_ + 1} json is ready, {2000 - _ + 1} left")
 
         with open("data/data_tool.json", "w", encoding='utf-8') as fjson:  # И записываем в файл
