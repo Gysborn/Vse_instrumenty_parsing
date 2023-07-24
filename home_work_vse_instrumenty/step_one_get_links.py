@@ -15,15 +15,11 @@ path_cookie = 'vi_cookies'
 def check_driver():
     try:
         driver = undetected_chromedriver.Chrome()
-        # driver.get('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html')
-        # driver.get("https://www.vindecoderz.com/EN/check-lookup/ZDMMADBMXHB001652")
         driver.get("https://vseinstrumenti.ru/")
         time.sleep(2)
         get_cookies(driver, path_cookie)
         driver.refresh()
         time.sleep(10)
-        # res = driver.get_log('browser')
-        # print(res)
     except Exception as e:
         print(e)
     finally:
